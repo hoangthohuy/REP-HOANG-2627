@@ -10,4 +10,4 @@ def investment(original, time):
     
     return amount - 1 
 
-print(investment(math.e, 1))
+print(investment(math.e, 50))

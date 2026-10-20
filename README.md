@@ -15,5 +15,5 @@ docker build -t rep-lab2 .
 puis 
 docker run --rm   --user "$(id -u):$(id -g)"   -v "$(pwd)":/out   -e OUTPUT_DIR=/out   rep-lab2
 
-
+Testing push git actions
 

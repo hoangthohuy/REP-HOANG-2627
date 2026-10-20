@@ -25,5 +25,14 @@ docker build -t rep-lab2_llm .
 docker run --rm   --user "$(id -u):$(id -g)"   -v "$(pwd)":/out   -e OUTPUT_DIR=/out   rep-lab2_llm
 ```
 
+- Part 5 :
 
+pour exécuter : 
 
+d'abord modifier TP2/associativity.py et TP2/banquier.py (regarder dans les commentaires des 2 fichiers)
+puis
+```
+cd TP2
+nix-shell
+python banquier.py ou python associativity.py
+```

@@ -11,9 +11,19 @@ exécute TP1/banquier.py dans vscode
 TP2 :
 - Part 2 - Docker :
 pour exécuter : 
+```
+cd TP2
 docker build -t rep-lab2 . 
-puis 
 docker run --rm   --user "$(id -u):$(id -g)"   -v "$(pwd)":/out   -e OUTPUT_DIR=/out   rep-lab2
+```
 
-Testing push git actions
+- Part 4 - LLM :
+pour exécuter : 
+```
+cd TP2/Part_4_LLM
+docker build -t rep-lab2_llm . 
+docker run --rm   --user "$(id -u):$(id -g)"   -v "$(pwd)":/out   -e OUTPUT_DIR=/out   rep-lab2_llm
+```
+
+
 

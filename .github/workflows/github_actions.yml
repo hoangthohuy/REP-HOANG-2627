@@ -1,6 +1,8 @@
 name: GitHub Actions
 run-name: ${{ github.actor }} is testing out GitHub Actions 
 on: [push]
+permissions:
+  contents: write
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest

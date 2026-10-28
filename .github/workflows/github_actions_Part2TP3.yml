@@ -8,11 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: git checkout -b Part2_TP3 &&
+      - run: git checkout Part2_TP3 &&
              cd TP2 &&
              docker build -t rep-lab2 . &&
              docker run --rm   --user "$(id -u):$(id -g)"   -v "$(pwd)":/out   -e OUTPUT_DIR=/out   rep-lab2
-      - run: git checkout -b TPs &&
+      - run: git checkout TPs &&
              cd TP2/Part_4_LLM &&
              docker build -t rep-lab2 . &&
              docker run --rm   --user "$(id -u):$(id -g)"   -v "$(pwd)":/out   -e OUTPUT_DIR=/out   rep-lab2_llm

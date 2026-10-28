@@ -18,7 +18,7 @@ output_dir = Path(os.environ.get("OUTPUT_DIR", "/out"))
 output_dir.mkdir(parents=True, exist_ok=True)
 output_file = output_dir / "resultat_banquier.txt"
 output_file.write_text(f"{investment(math.e, 50)}")
-print(investment(math.e, 50))
+
 #For running with nix
 # output_file = Path("./resultat_banquier.txt")
 # output_file.write_text(f"{investment(math.e, 50)}")

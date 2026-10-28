@@ -14,12 +14,11 @@ for i in range(1000000):
     # x= random.randint(1, 1000000)
     # y= random.randint(1, 1000000)
     # z= random.randint(1, 1000000)
-    value1 = (x+y)+z
+    value1 = x * (y + z)
 
     
 
-    value2 = x+(y+z)
-   
+    value2 =  x * y + x * z
     
 
     if value1 == value2:

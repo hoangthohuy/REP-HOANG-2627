@@ -6,7 +6,7 @@ def investment(original, time):
     # Calculate compound interest
     amount = original
     for i in range(time):
-        amount = (amount - 1)*time
+        amount = (amount - 1)*time #mauvais algo, faut écire amont = (amount-1)*i
     
     return amount - 1 
 

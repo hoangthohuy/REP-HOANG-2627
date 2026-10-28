@@ -1,0 +1,20 @@
+Fee-then-multiply for 50 years, starting from e (200-digit arithmetic)
+  amount after year 50:       1.019992165837 EUR
+  after final 1 EUR fee:       0.019992165837 EUR
+  closed-form cross-check:     0.019992165837 EUR (match: True)
+
+Why it is fragile: errors in e are multiplied by 50! = 3.041e+64
+
+  e = 2.71828 (as quoted)      -> -5.561092e+58 EUR
+  e as Python float (64-bit)   -> -4.396804e+48 EUR
+  all-float arithmetic          -> -4.396804e+48 EUR
+
+Digits of e needed for the result to be right to ~1 cent:
+   10 decimals -> 1245602028806452262002798200740201019252833102830893499.0000 EUR
+   30 decimals -> 10264824666874185712699492881160887.6509 EUR
+   60 decimals -> 11322.4546 EUR
+   65 decimals -> -0.1040 EUR
+   70 decimals -> 0.0200 EUR
+   80 decimals -> 0.0200 EUR
+
+ANSWER: about 0.0200 EUR (roughly 2 cents) - naive float arithmetic gives an absurd -4e48 EUR.

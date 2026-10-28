@@ -32,6 +32,7 @@ output_dir.mkdir(parents=True, exist_ok=True)
 output_file = output_dir / "resultat_associativity.txt"
 output_file.write_text(f"{num_of_cases_not_equal/1000000*100}%")
 
+print(f'Percentage of cases where the two values are equal: {num_of_cases_not_equal/1000000*100}%')
 #For running with nix
 # output_file = Path("./resultat_associativity.txt")
 # output_file.write_text(f"{num_of_cases_not_equal/1000000*100}%")

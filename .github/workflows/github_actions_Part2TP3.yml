@@ -17,7 +17,7 @@ jobs:
           docker build -t rep-lab2 . &&
           docker run --rm   --user "$(id -u):$(id -g)"   -v "$(pwd)":/out   -e OUTPUT_DIR=/out   rep-lab2
       - name: Build and Run on TPs
-        run: |
+        run: | 
              git checkout TPs &&
              cd TP2 &&
              docker build -t rep-lab2 . &&

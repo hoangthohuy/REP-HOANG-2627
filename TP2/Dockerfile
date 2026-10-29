@@ -6,5 +6,5 @@ COPY . /app
 
 # RUN pip install -r requirements.txt
 
-CMD ["sh", "-c", "python banquier.py & python distributivity.py & wait"]
+CMD ["sh", "-c", "python banquier.py & python associativity.py & wait"]
 

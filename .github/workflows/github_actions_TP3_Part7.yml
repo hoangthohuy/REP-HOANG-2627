@@ -1,0 +1,129 @@
+name: TP3 feature-model experiments
+
+run-name: TP3 experiments for ${{ github.sha }}
+
+on:
+  push:
+    paths-ignore:
+      - TP3/results.csv
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  run-matrix:
+    name: ${{ matrix.os }} / Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-24.04
+          - ubuntu-24.04-arm
+        python:
+          - "3.11"
+          - "3.12"
+          - "3.13"
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install pinned experiment dependencies
+        run: python -m pip install "flamapy==2.6.0" "numpy==2.2.6"
+
+      - name: Sample valid feature configurations
+        run: >-
+          python TP3/sample.py TP3/Save.uvl
+          --size 30
+          --seed 1
+          -o TP3/sample.csv
+
+      - name: Derive and run Python variants
+        run: >-
+          python TP3/run_sample.py TP3/sample.csv
+          --runs 3
+          --seed 1
+          --python python
+          -o TP3/results.csv
+
+      - name: Upload matrix results
+        uses: actions/upload-artifact@v4
+        with:
+          name: results-${{ matrix.os }}-py-${{ matrix.python }}
+          path: TP3/results.csv
+          if-no-files-found: error
+          retention-days: 7
+
+  store-results:
+    name: Merge and store results
+    needs: run-matrix
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Download matrix results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: results-*
+          path: matrix-results
+
+      - name: Merge results with environment factors
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+
+          artifact_root = Path("matrix-results")
+          files = sorted(artifact_root.glob("results-*/*.csv"))
+          if not files:
+              raise SystemExit("No matrix result CSV files were downloaded")
+
+          rows = []
+          base_fields = None
+          for path in files:
+              artifact_name = path.parent.name
+              environment = artifact_name.removeprefix("results-")
+              runner_os, python_version = environment.rsplit("-py-", maxsplit=1)
+              with path.open(newline="", encoding="utf-8") as source:
+                  reader = csv.DictReader(source)
+                  if base_fields is None:
+                      base_fields = reader.fieldnames
+                  elif reader.fieldnames != base_fields:
+                      raise SystemExit(f"Inconsistent CSV columns in {path}")
+                  for row in reader:
+                      row["runner_os"] = runner_os
+                      row["python_version"] = python_version
+                      row["architecture"] = "arm64" if runner_os.endswith("-arm") else "x64"
+                      rows.append(row)
+
+          output = Path("TP3/results.csv")
+          output_fields = [*base_fields, "runner_os", "python_version", "architecture"]
+          with output.open("w", newline="", encoding="utf-8") as destination:
+              writer = csv.DictWriter(destination, fieldnames=output_fields)
+              writer.writeheader()
+              writer.writerows(rows)
+          print(f"Wrote {len(rows)} runs from {len(files)} matrix environments to {output}")
+          PY
+
+      - name: Commit results to repository
+        run: |
+          git add TP3/results.csv
+          if git diff --cached --quiet -- TP3/results.csv; then
+            echo "Results are unchanged; nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update TP3 experiment results [skip ci]"
+          git push

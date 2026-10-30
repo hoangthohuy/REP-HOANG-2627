@@ -68,7 +68,32 @@ git push pour tester le workflow
 converge to a certain percentage when increase the numbers of repetitions
     + 3.2 : to run :  ./TP3/bash_cli.sh 
     Same arguments, same answer? Within the range of [0, 1) : approximately same result when number of rep increase. , different ranges not yet tested
-    + 3.3 : 
+    + 3.3 : run generate.py
+    + 3.4 to run 
+    ```
+    docker build --build-arg PYTHON_VERSION=3.10 -t assoc:3.10 . && docker run --rm assoc:3.10
+    ```
+
+- Part 4 : 
+    + Save.uvl is based on three programs : TP3/associativity.py, TP3/associativity_llm.py, TP3/main.cpp (with the help of copilot and my own modifications)
+
+- Part 5 :
+    + To generate
+    ```
+    cd TP3
+    python sample.py Save.uvl --size 30 --seed 1  -o sample.csv
+    ```
+
+- Part 6 :
+    + J'ai utilisé copilot pour généré ces 3 scipts : 
+        1. run_sample.sh is the shell entry point.
+        2. run_sample.py reads the sample CSV, skips rows where Language is Cpp, and runs each Python configuration multiple times.
+        3. associativity_variant.py accepts the feature choices as runtime arguments and calculates the percentage of equal results.
+    + to run :  `run_sample.sh --runs 3 --seed 1 -o results.csv` (résultat dans le fichier results.csv )
+
+- Part 7 : 
+ 
+
 
 
 

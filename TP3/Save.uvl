@@ -1,0 +1,37 @@
+features
+    AssociativityExperiment
+        mandatory
+            Language
+                alternative
+                    Python
+                    Cpp
+            Repetitions
+                alternative
+                    ten
+                    fifty
+                    fiveThousand
+                    OneMillion
+                    tenMillion
+            DistributionCoverage
+                alternative
+                    SuiteUniformZeroToOne
+                    UniformMinusOneToOne
+                    UniformZeroToOneThousand
+                    StandardNormal
+                    LogUniformMagnitudeRandomSign
+                    IntegerZeroToOneThousandAsFloat
+            RandomNumberGenerator
+                alternative
+                    PythonRandomModule
+                    SeededNumPyOrPythonFallback
+                    CppDefaultRandomEngine
+            TypeOfProblem
+                alternative
+                    Associativity
+                    Distributivity
+
+constraints
+    Cpp => CppDefaultRandomEngine
+    CppDefaultRandomEngine => Cpp
+    PythonRandomModule => Python
+    SeededNumPyOrPythonFallback => Python

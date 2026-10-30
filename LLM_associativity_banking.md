@@ -1,6 +1,6 @@
 TP 2 
 Part 4 — What about LLMs? (cette partie joue le rôle des 2 fichers LLM_associativity.md et LLM_banking.md )
-LLM utilisé : Claude Sonnet 5.5
+LLM utilisé pour créer associativity_llm.py et banquier_llm.py  : Claude Sonnet 5.5
 
 
 

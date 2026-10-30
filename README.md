@@ -1,3 +1,19 @@
+**L'architecture de REP-HOANG-2627 :**
+- .github/workflows : stocké des workflows github actions
+- TP1 - TP2 - TP3 : programs, templates, scripts, Dockerfiles des 3 TPs
+- Liste des fichiers du compte rendu de TP : 
+    + conclusions.ipynb
+    + LLM_associativity_banking.md
+    + README.md
+    + TP3/results.csv
+    + TP3/Save.uvl
+
+AI Usage Statement : 
+- IA est utilisée pour la création de certains scripts et fichiers pour le TP2 et 3. Les usages spécifiques sont spécifiées dans les fichers README.md et LLM_associativity_banking.md
+
+
+**TP1 :** 
+
 Comment réproduire les résultats de TP1?
 
 1. (x+y)+z == x+(y+z) : 
@@ -8,7 +24,7 @@ Comment réproduire les résultats de TP1?
 exécute TP1/banquier.py dans vscode
 
  
-TP2 :
+**TP2 :**
 - Part 2 - Docker :
 pour exécuter : 
 ```
@@ -24,7 +40,7 @@ cd TP2/Part_4_LLM
 docker build -t rep-lab2_llm . 
 docker run --rm   --user "$(id -u):$(id -g)"   -v "$(pwd)":/out   -e OUTPUT_DIR=/out   rep-lab2_llm
 ```
-
+further comments made in LLM_associativity_banking.md
 - Part 5 :
 
 pour exécuter : 
@@ -36,7 +52,7 @@ cd TP2
 nix-shell
 python banquier.py ou python associativity.py
 ```
-TP3 :
+**TP3 :**
 - Part 1 :
 Banquier
 | Program | result | Reason for the result |
@@ -85,15 +101,21 @@ converge to a certain percentage when increase the numbers of repetitions
     ```
 
 - Part 6 :
-    + J'ai utilisé copilot pour généré ces 3 scipts : 
+    + J'ai utilisé copilot (gpt-6-luna) pour généré ces 3 scipts : 
         1. run_sample.sh is the shell entry point.
         2. run_sample.py reads the sample CSV, skips rows where Language is Cpp, and runs each Python configuration multiple times.
         3. associativity_variant.py accepts the feature choices as runtime arguments and calculates the percentage of equal results.
     + to run :  `run_sample.sh --runs 3 --seed 1 -o results.csv` (résultat dans le fichier results.csv )
 
 - Part 7 : 
- 
+    + github_actions_TP3_Part7.yml est généré avec copilot (gpt-6-luna)
 
-
-
-
+- Part 8 : 
+    + describe to what extent variability factors impact the result and answer : 
+    DistributionCoverage : Diifferent percentage (as shown in associativity_llm.py )
+    TypeOfProblem : Same as DistributionCoverage (of course 2 problems can't produce the same result)
+    Repetitions : the results are more stable across different runs if the number of repetitions is large and the opposite happen if he number of repetitions is small (10,50)
+    + recommend values of variability factors to have a stable result : big numbers for Repetitions  (100000)
+    + explain the answers you and the LLM got in labs #1 and #2 : 
+    the answers ive got depends on DistributionCoverage => different result between 
+    + conclusions.ipynb was created with copilot (gpt-6-luna) 

@@ -8,8 +8,8 @@
     + TP3/results.csv
     + TP3/Save.uvl
 
-AI Usage Statement : 
-- IA est utilisée pour la création de certains scripts et fichiers pour le TP2 et 3. Les usages spécifiques sont spécifiées dans les fichers README.md et LLM_associativity_banking.md
+**AI Usage Statement :** 
+- L'IA est utilisée pour la création de certains scripts et fichiers pour le TP2 et 3. Les usages spécifiques sont spécifiées dans les fichers README.md et LLM_associativity_banking.md
 
 
 **TP1 :** 
